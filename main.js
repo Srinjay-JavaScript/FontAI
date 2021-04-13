@@ -1,6 +1,7 @@
 noseX = 0;
 noseY = 0;
-nameUser = "Your Name";
+var difference;
+var nameUser = "Your Name";
 function preload(){
 
 }
@@ -16,7 +17,7 @@ posenet.on('pose', result);
 function draw(){
     background("white");
     fill("black");
-    textSize(32);
+    textSize(difference);
     textStyle(BOLD);
     text(nameUser, noseX, noseY);
     fill(0, 102, 153);
@@ -31,6 +32,10 @@ function result(result){
     //    console.log(result);
        noseX = result[0].pose.nose.x;
        noseY = result[0].pose.nose.y;
+       leftWristX = result[0].pose.leftWrist.x;
+       rightWristX = result[0].pose.rightWrist.x;
+       difference = leftWristX - rightWristX;
+       document.getElementById("widthHeight").innerHTML = difference.toFixed(1);
        if ((noseX >0) && (noseY > 0)){
        console.log( "X: " + noseX + " Y: " + noseY);
        }
